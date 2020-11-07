@@ -1,5 +1,19 @@
-# SWEAR WORDS IN MOVIES MOVIES
+# SWEAR WORDS IN MOVIES
 # Michal Kollar, April 2020
+
+# virtualenv venv
+# source venv/bin/activate
+# install all libraries
+# pip freeze > requirements.txt
+# deactivate
+
+# heroku create lava-vino # replace "lava-vino" with your-app-name
+# $ git init
+# $ git add . 
+# $ heroku git:remote -a thawing-inlet-61413
+# $ git commit -m "Initial commit"
+# $ git push heroku master 
+# $ heroku ps:scale web=1
 
 import plotly.graph_objects as go
 import dash
@@ -75,12 +89,16 @@ fig.update_layout(
     )
 fig.show()
 
+import plotly.io as pio
+pio.write_html(fig, file='output.html', auto_open=True)
+
 server = flask.Flask(__name__)
 server.secret_key = os.environ.get('secret_key', str(randint(0, 1000000)))
-external_stylesheets = ['https://codepen.io/majkl65/pen/LYpVxEP.css']
+external_stylesheets = ['style.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets, server=server)
 
 app.layout = html.Div([
+
     html.H1(children='● THE MOVIE VOCABULARY',
             className='header'),
 
@@ -111,3 +129,5 @@ app.layout = html.Div([
 
 if __name__ == '__main__':
     app.server.run(debug=True, threaded=True)
+
+    
